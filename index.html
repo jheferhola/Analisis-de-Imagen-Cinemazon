@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="es" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CINEMAZON - Informe de Auditoría de Imagen Pública 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Chart.js for Dynamic Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amazon: {
+                            50: '#e6f9f0',
+                            100: '#c3f0d8',
+                            400: '#10b981',
+                            500: '#00a859',
+                            600: '#008a48',
+                            700: '#006b37',
+                            800: '#034d28',
+                            900: '#01321a'
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706'
+                        },
+                        darkbg: '#0c1015',
+                        darkcard: '#141a23',
+                        darkborder: '#222d3d'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Webkit scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0c1015;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #222d3d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00a859;
+        }
+        
+        .glow-emerald {
+            box-shadow: 0 0 30px rgba(0, 168, 89, 0.25);
+        }
+        .glow-gold {
+            box-shadow: 0 0 25px rgba(251, 191, 36, 0.2);
+        }
+        
+        /* Glassmorphism effects */
+        .glass-panel {
+            background: rgba(20, 26, 35, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(34, 45, 61, 0.8);
+        }
+
+        /* Image Dropzone Placeholder Style */
+        .img-dropzone {
+            border: 2px dashed #222d3d;
+            background: rgba(20, 26, 35, 0.5);
+            transition: all 0.3s ease;
+        }
+        .img-dropzone:hover {
+            border-color: #00a859;
+            background: rgba(0, 168, 89, 0.05);
+        }
+
+        /* Active nav item indicator */
+        .nav-link.active {
+            color: #10b981;
+            border-bottom: 2px solid #10b981;
+        }
+    </style>
+</head>
+<body class="bg-darkbg text-gray-100 font-sans antialiased selection:bg-amazon-500 selection:text-white flex flex-col min-h-screen">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-darkbg/90 backdrop-blur-md border-b border-darkborder transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand & Logo Slot -->
+                <a href="https://jheferhola.github.io/CINEMAZON/" class="flex items-center gap-3 group">
+                    <div class="relative w-12 h-12 flex items-center justify-center transition-transform duration-300 group-hover:scale-105 bg-darkcard rounded-xl p-1 border border-darkborder">
+                        <!-- LOGO PLACEHOLDER: img/logocine.png -->
+                        <img src="img/logocine.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/141a23/10b981?text=CINEMAZON';" class="w-full h-full object-contain" alt="Logo CINEMAZON">
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black tracking-tight text-white font-sans">CINEMA<span class="text-amazon-500">ZON</span></span>
+                        <span class="text-[9px] tracking-widest text-emerald-400 font-extrabold uppercase block -mt-1">Auditoría de Imagen Pública</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden xl:flex items-center gap-4 text-xs font-bold text-gray-300">
+                    <a href="#resumen" class="nav-link py-2 hover:text-emerald-400 transition-colors">Resumen</a>
+                    <a href="#objetivos" class="nav-link py-2 hover:text-emerald-400 transition-colors">Objetivos</a>
+                    <a href="#metodologia" class="nav-link py-2 hover:text-emerald-400 transition-colors">Metodología</a>
+                    <a href="#percepcion" class="nav-link py-2 hover:text-emerald-400 transition-colors">Encuestas (11)</a>
+                    <a href="#reputacion" class="nav-link py-2 hover:text-emerald-400 transition-colors">Reputación</a>
+                    <a href="#brechas" class="nav-link py-2 hover:text-emerald-400 transition-colors">Brechas</a>
+                    <a href="#foda" class="nav-link py-2 hover:text-emerald-400 transition-colors">FODA</a>
+                    <a href="#plan-accion" class="nav-link py-2 hover:text-emerald-400 transition-colors">Plan KPIs</a>
+                    <a href="#conclusiones" class="nav-link py-2 hover:text-emerald-400 transition-colors">Conclusiones</a>
+                </nav>
+
+                <!-- Action Button & Mobile Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="#plan-accion" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-amazon-500 to-emerald-600 hover:from-amazon-600 hover:to-emerald-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-lg shadow-amazon-500/20 transition-all transform hover:scale-105 active:scale-95">
+                        <i class="fa-solid fa-chart-line"></i> Ver KPIs
+                    </a>
+                    <button onclick="toggleMobileMenu()" class="xl:hidden p-2.5 rounded-xl bg-darkcard border border-darkborder text-gray-300 hover:text-white">
+                        <i class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Drawer -->
+        <div id="mobileMenu" class="hidden xl:hidden bg-darkcard border-b border-darkborder px-4 py-4 space-y-2 text-xs font-semibold">
+            <a href="#resumen" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-file-contract w-5 text-emerald-500"></i> Resumen Ejecutivo</a>
+            <a href="#objetivos" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-bullseye w-5 text-emerald-500"></i> Objetivos</a>
+            <a href="#metodologia" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-vial w-5 text-emerald-500"></i> Metodología</a>
+            <a href="#percepcion" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-users w-5 text-emerald-500"></i> Percepción (11 Encuestados)</a>
+            <a href="#reputacion" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-star w-5 text-gold-400"></i> Reputación Digital</a>
+            <a href="#brechas" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-clock w-5 text-red-500"></i> Brechas Digitales</a>
+            <a href="#foda" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-table-cells-large w-5 text-emerald-500"></i> Matriz FODA</a>
+            <a href="#plan-accion" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-list-check w-5 text-gold-400"></i> Plan Estratégico KPIs</a>
+            <a href="#conclusiones" onclick="toggleMobileMenu()" class="block py-2 text-gray-300 hover:text-emerald-400"><i class="fa-solid fa-award w-5 text-emerald-500"></i> Conclusiones</a>
+        </div>
+    </header>
+
+    <!-- HERO / REPORT HEADER BANNER -->
+    <section id="hero" class="relative py-16 lg:py-24 overflow-hidden border-b border-darkborder bg-darkbg">
+        <div class="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(#10b981_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amazon-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col items-center text-center max-w-3xl mx-auto">
+                
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 bg-amazon-500/10 border border-amazon-500/30 text-emerald-400 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+                    <span class="w-2 h-2 rounded-full bg-amazon-500 animate-ping"></span> Informe Estratégico Corporativo 2026
+                </div>
+
+                <!-- Document Title -->
+                <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight mb-6">
+                    ANÁLISIS DE IMAGEN PÚBLICA DE <span class="text-transparent bg-clip-text bg-gradient-to-r from-amazon-400 via-emerald-300 to-gold-400">CINEMAZON PERÚ S.A.C.</span>
+                </h1>
+                
+                <p class="text-gray-400 text-sm sm:text-base leading-relaxed mb-8">
+                    Evaluación cuantitativa y cualitativa sobre posicionamiento, reputación corporativa, experiencia del espectador y efectividad de comunicación omnicanal en Satipo.
+                </p>
+
+                <!-- Metadata Card -->
+                <div class="w-full glass-panel p-5 rounded-2xl border border-darkborder grid grid-cols-1 sm:grid-cols-3 gap-4 text-left text-xs mb-8">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amazon-500/10 border border-amazon-500/30 flex items-center justify-center text-amazon-400">
+                            <i class="fa-solid fa-user-pen text-base"></i>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 text-[10px] uppercase font-bold block">Autor</span>
+                            <span class="font-extrabold text-white">Jheferson D. Espinal C.</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i class="fa-solid fa-chalkboard-user text-base"></i>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 text-[10px] uppercase font-bold block">Docente</span>
+                            <span class="font-extrabold text-white">Luis Alberto Utos Ceras</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                            <i class="fa-solid fa-graduation-cap text-base"></i>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 text-[10px] uppercase font-bold block">Institución / Fecha</span>
+                            <span class="font-extrabold text-white">SENATI • 04 Nov 2026</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EXECUTIVE SUMMARY SECTION -->
+    <section id="resumen" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-darkcard via-darkcard to-darkbg border border-darkborder rounded-3xl p-6 sm:p-10 relative overflow-hidden shadow-2xl">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-amazon-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="flex flex-col lg:flex-row gap-8 items-center justify-between relative z-10">
+                    <div class="lg:w-7/12">
+                        <div class="inline-flex items-center gap-2 text-gold-400 text-xs font-black uppercase tracking-widest mb-3">
+                            <i class="fa-solid fa-lightbulb"></i> Resumen Ejecutivo
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-4 leading-tight">
+                            Diagnóstico de Reputación y Plan Estratégico de 6 Pilares
+                        </h2>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-6">
+                            El presente informe ofrece una evaluación cuantitativa y cualitativa sobre la imagen pública de <strong>CINEMAZON PERÚ S.A.C.</strong> Se integran análisis de reputación digital, matrices FODA ponderadas, auditoría visual en salas y métricas obtenidas directamente de la encuesta aplicada a <strong>11 espectadores reales</strong> para respaldar un plan de acción estratégico orientado a consolidar a CINEMAZON como la cadena de entretenimiento líder en la Selva Central.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-3 py-1.5 rounded-lg bg-darkbg border border-darkborder text-xs text-gray-300 font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-check text-emerald-400"></i> Proyección 4K & Sonido
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-darkbg border border-darkborder text-xs text-gray-300 font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-check text-emerald-400"></i> Concepto Selva Central
+                            </span>
+                            <span class="px-3 py-1.5 rounded-lg bg-darkbg border border-darkborder text-xs text-gray-300 font-semibold flex items-center gap-1.5">
+                                <i class="fa-solid fa-check text-emerald-400"></i> Automatización Omnicanal
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Key Metrics Highlight Grid -->
+                    <div class="lg:w-5/12 grid grid-cols-2 gap-4 w-full">
+                        <div class="bg-darkbg/90 border border-darkborder p-4 rounded-2xl text-center glow-emerald">
+                            <span class="text-3xl font-black text-amazon-400 block mb-1">11</span>
+                            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Encuestados Reales</span>
+                        </div>
+                        <div class="bg-darkbg/90 border border-darkborder p-4 rounded-2xl text-center">
+                            <span class="text-3xl font-black text-gold-400 block mb-1">54.5%</span>
+                            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Prefiere Ambiente Selva</span>
+                        </div>
+                        <div class="bg-darkbg/90 border border-darkborder p-4 rounded-2xl text-center">
+                            <span class="text-3xl font-black text-emerald-400 block mb-1">63.6%</span>
+                            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Canal Rey: TikTok</span>
+                        </div>
+                        <div class="bg-darkbg/90 border border-darkborder p-4 rounded-2xl text-center">
+                            <span class="text-3xl font-black text-red-400 block mb-1">&lt;30m</span>
+                            <span class="text-[11px] font-bold text-gray-400 uppercase tracking-wider block">Meta Respuesta Digital</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1 & 2: INTRODUCCIÓN Y OBJETIVOS -->
+    <section id="objetivos" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                
+                <!-- 1. Introducción -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-8 h-8 rounded-lg bg-amazon-500/10 border border-amazon-500/30 flex items-center justify-center text-amazon-400 font-extrabold text-sm">1</span>
+                            <h3 class="text-xl font-bold text-white">1. Introducción al Estudio</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                            La imagen pública constituye un activo intangible clave para el posicionamiento y desarrollo continuo de cualquier organización en el sector del entretenimiento. En la actualidad, la experiencia del espectador trasciende la mera proyección cinematográfica, integrando variables como la comodidad de las salas, la tecnología de proyección 4K, el ambiente temático, el servicio de confitería y la interacción digital bidireccional.
+                        </p>
+                        <p class="text-gray-400 text-xs leading-relaxed">
+                            En este contexto, <strong>CINEMAZON PERÚ S.A.C.</strong> fusiona la magia del cine moderno con el orgullo de la identidad de la Selva Central. El presente trabajo detalla el estado actual de su reputación e identidad corporativa, aportando métricas claras, tabulaciones y esquemas visuales para sustentar propuestas de optimización de marca.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-darkborder/60 flex items-center gap-2 text-xs text-emerald-400 font-semibold">
+                        <i class="fa-solid fa-tree"></i> Identidad Selva Central • Satipo, Junín
+                    </div>
+                </div>
+
+                <!-- 2. Objetivos del Estudio -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-6 sm:p-8">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-8 h-8 rounded-lg bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400 font-extrabold text-sm">2</span>
+                        <h3 class="text-xl font-bold text-white">2. Objetivos del Estudio</h3>
+                    </div>
+
+                    <!-- Objetivo General -->
+                    <div class="bg-darkbg/80 border border-darkborder rounded-xl p-4 mb-5">
+                        <span class="text-gold-400 text-[10px] font-black uppercase tracking-wider block mb-1"><i class="fa-solid fa-bullseye"></i> 2.1 Objetivo General</span>
+                        <p class="text-gray-200 text-xs font-medium leading-relaxed">
+                            Analizar integralmente la imagen pública y reputación corporativa de CINEMAZON PERÚ S.A.C., evaluando la percepción de sus públicos clave para formular un plan estratégico de fortalecimiento de marca en Satipo y alrededores.
+                        </p>
+                    </div>
+
+                    <!-- Objetivos Específicos -->
+                    <span class="text-emerald-400 text-[10px] font-black uppercase tracking-wider block mb-3"><i class="fa-solid fa-list-ul"></i> 2.2 Objetivos Específicos</span>
+                    <ul class="space-y-2.5 text-xs text-gray-300">
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-amazon-500 mt-0.5"></i>
+                            <span><strong>Identidad Visual:</strong> Evaluar la mascota (tucán), la paleta croma y la unificación de la cultura corporativa.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-amazon-500 mt-0.5"></i>
+                            <span><strong>Canales Digitales:</strong> Auditar redes sociales (TikTok, Instagram, Facebook, Web) y medir tiempos de respuesta.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-amazon-500 mt-0.5"></i>
+                            <span><strong>Satisfacción:</strong> Cuantificar los niveles de lealtad, percepción 4K y preferencia en 11 espectadores reales.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-check text-amazon-500 mt-0.5"></i>
+                            <span><strong>Matriz FODA & KPIs:</strong> Sintetizar diagnósticos e implementar un plan de acción con 6 indicadores clave.</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: MARCO TEÓRICO -->
+    <section id="marco-teorico" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-amazon-500 text-xs font-black uppercase tracking-widest">Fundamentación Científica</span>
+                <h2 class="text-3xl font-black text-white mt-1">3. Marco Teórico</h2>
+                <p class="text-gray-400 text-xs mt-2">Bases conceptuales aplicadas a la gestión de marca y reputación de CINEMAZON.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-amazon-500/10 text-amazon-400 flex items-center justify-center font-bold text-sm mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <span class="text-xs font-extrabold text-gold-400 block mb-1">Costa (2004)</span>
+                    <h4 class="text-base font-bold text-white mb-2">Imagen Pública</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Representación mental global que los espectadores forman a partir de estímulos visuales, vivenciales en sala y la comunicación.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-amazon-500/10 text-amazon-400 flex items-center justify-center font-bold text-sm mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <span class="text-xs font-extrabold text-gold-400 block mb-1">Capriotti (2009)</span>
+                    <h4 class="text-base font-bold text-white mb-2">Identidad Corporativa</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Mascota del tucán, paleta cromática (Verde Selva, Negro, Gold, Rojo) y eslogan *"El encuentro de la selva con el cine"*.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-amazon-500/10 text-amazon-400 flex items-center justify-center font-bold text-sm mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <span class="text-xs font-extrabold text-gold-400 block mb-1">Kotler & Keller (2016)</span>
+                    <h4 class="text-base font-bold text-white mb-2">Reputación Empresarial</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Juicio valorativo sostenido sobre la calidad de imagen 4K, sonido envolvente, servicio en dulcería y promociones.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all group">
+                    <div class="w-10 h-10 rounded-xl bg-amazon-500/10 text-amazon-400 flex items-center justify-center font-bold text-sm mb-4 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-comments"></i>
+                    </div>
+                    <span class="text-xs font-extrabold text-gold-400 block mb-1">Kaplan & Haenlein (2010)</span>
+                    <h4 class="text-base font-bold text-white mb-2">Comunicación Digital</h4>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Gestión de interacción en tiempo real en redes sociales y plataforma e-commerce web para reservas interactivas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: METODOLOGÍA DE LA INVESTIGACIÓN -->
+    <section id="metodologia" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <span class="text-amazon-500 text-xs font-black uppercase tracking-widest">Enfoque Mixto Cuali-Cuantitativo</span>
+                    <h2 class="text-3xl font-black text-white mt-1">4. Metodología de la Investigación</h2>
+                </div>
+                <span class="text-xs text-gray-400 mt-2 md:mt-0 font-medium">Muestra ajustada: 11 encuestados reales</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pillar 1 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-amazon-500"></div>
+                    <span class="text-[10px] font-black uppercase text-amazon-400 tracking-wider">Técnica 01</span>
+                    <h4 class="text-lg font-extrabold text-white my-2">Encuesta Digital</h4>
+                    <span class="inline-block bg-amazon-500/10 border border-amazon-500/30 text-emerald-300 font-bold text-[11px] px-2.5 py-1 rounded-md mb-3">11 espectadores reales</span>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        Medición directa mediante Google Forms sobre motivación de visita, preferencia 4K, dulcería y experiencia en el complejo Satipo.
+                    </p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-gold-500"></div>
+                    <span class="text-[10px] font-black uppercase text-gold-400 tracking-wider">Técnica 02</span>
+                    <h4 class="text-lg font-extrabold text-white my-2">Auditoría de Redes</h4>
+                    <span class="inline-block bg-gold-500/10 border border-gold-500/30 text-gold-300 font-bold text-[11px] px-2.5 py-1 rounded-md mb-3">Evaluación 3 meses</span>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        Análisis de engagement, frecuencia de publicación de trailers/reels y medición de tiempos de respuesta en plataformas oficiales.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-emerald-400"></div>
+                    <span class="text-[10px] font-black uppercase text-emerald-400 tracking-wider">Técnica 03</span>
+                    <h4 class="text-lg font-extrabold text-white my-2">Análisis Sentimiento</h4>
+                    <span class="inline-block bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 font-bold text-[11px] px-2.5 py-1 rounded-md mb-3">Opiniones Digitales</span>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        Clasificación de valoraciones y reseñas públicas en Google Maps, Facebook y comentarios en TikTok/Instagram.
+                    </p>
+                </div>
+
+                <!-- Pillar 4 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-6 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-blue-500"></div>
+                    <span class="text-[10px] font-black uppercase text-blue-400 tracking-wider">Técnica 04</span>
+                    <h4 class="text-lg font-extrabold text-white my-2">Observación Directa</h4>
+                    <span class="inline-block bg-blue-500/10 border border-blue-500/30 text-blue-300 font-bold text-[11px] px-2.5 py-1 rounded-md mb-3">Visitas Presenciales</span>
+                    <p class="text-gray-300 text-xs leading-relaxed">
+                        Verificación de protocolos de atención, limpieza de salas, proyección 4K y uniforme institucional del personal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: ANÁLISIS DE IMAGEN PÚBLICA -->
+    <section id="percepcion" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="mb-10">
+                <span class="text-amazon-500 text-xs font-black uppercase tracking-widest">Sección 05</span>
+                <h2 class="text-3xl font-black text-white mt-1">5. Análisis de Imagen Pública de CINEMAZON</h2>
+            </div>
+
+            <!-- 5.1 Identidad Visual y Corporativa -->
+            <div class="bg-darkcard border border-darkborder rounded-2xl p-6 mb-12">
+                <h3 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                    <i class="fa-solid fa-palette text-amazon-500"></i> 5.1 Identidad Visual y Corporativa
+                </h3>
+                <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                    La marca transmite con éxito un concepto tecnológico y regional único enfocado en la Selva Central. Se han unificado los criterios estéticos entre la infraestructura física y los canales digitales, consolidando la presencia de la paleta corporativa (Verde Selva, Negro, Dorado y Rojo) junto con la mascota institucional (el Tucán).
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center text-xs">
+                    <div class="p-3 bg-darkbg rounded-xl border border-darkborder">
+                        <span class="w-4 h-4 rounded-full bg-[#00a859] inline-block mb-1"></span>
+                        <span class="block font-bold text-gray-200">Verde Selva</span>
+                    </div>
+                    <div class="p-3 bg-darkbg rounded-xl border border-darkborder">
+                        <span class="w-4 h-4 rounded-full bg-[#0c1015] inline-block border border-gray-600 mb-1"></span>
+                        <span class="block font-bold text-gray-200">Negro Noche</span>
+                    </div>
+                    <div class="p-3 bg-darkbg rounded-xl border border-darkborder">
+                        <span class="w-4 h-4 rounded-full bg-[#fbbf24] inline-block mb-1"></span>
+                        <span class="block font-bold text-gray-200">Dorado Gold</span>
+                    </div>
+                    <div class="p-3 bg-darkbg rounded-xl border border-darkborder">
+                        <span class="w-4 h-4 rounded-full bg-[#b91c1c] inline-block mb-1"></span>
+                        <span class="block font-bold text-gray-200">Rojo Pasión</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5.2 Percepción y Satisfacción del Cliente (Resultados Encuesta 10 personas) -->
+            <div class="bg-darkcard border border-darkborder rounded-2xl p-6 sm:p-8 mb-12">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 border-b border-darkborder pb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-chart-pie text-gold-400"></i> 5.2 Resultados Integrales de la Encuesta de Imagen (10 Respuestas Reales)
+                        </h3>
+                        <p class="text-xs text-gray-400 mt-1">Análisis detallado de las 10 preguntas aplicadas mediante Google Forms</p>
+                    </div>
+                    <span class="bg-gold-500/10 border border-gold-500/30 text-gold-400 font-extrabold text-xs px-3 py-1 rounded-lg mt-2 md:mt-0 self-start">
+                        Muestra: 11 Respuestas Reales
+                    </span>
+                </div>
+
+                <!-- GRID DE LAS 10 PREGUNTAS CON CONTENEDORES DE IMAGEN Y GRÁFICOS COMPLEMENTARIOS -->
+                <div class="space-y-12">
+
+                    <!-- Pregunta 1 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+                        <div class="mb-4">
+                            <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 01</span>
+                            <h4 class="text-base font-bold text-white">¿Cuál fue el factor principal que motivó su última visita a CINEMAZON?</h4>
+                            <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">54.5%</strong> El ambiente temático de la Selva Central y comodidad | <strong class="text-gold-400">27.3%</strong> Proyección 4K y sonido</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <div class="img-dropzone p-4 rounded-xl text-center flex flex-col items-center justify-center min-h-[220px]">
+                                <img src="img/imagen1.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="max-h-52 object-contain rounded-lg" alt="Gráfico 1: Factor Principal de Visita">
+                                <div class="flex-col items-center justify-center text-gray-400 space-y-2">
+                                    
+                                </div>
+                            </div>
+                            <div class="h-56">
+                                <canvas id="chartP1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+                        <div class="mb-4">
+                            <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 02</span>
+                            <h4 class="text-base font-bold text-white">Del 1 al 5, ¿cómo evalúa la calidad visual (imagen 4K) y de audio en nuestras salas?</h4>
+                            <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">45.5%</strong> Calificación 4 (Bueno) | <strong class="text-gold-400">27.3%</strong> Calificación 5 (Excelente) | <strong class="text-blue-400">36.4%</strong> Calificación 2</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <div class="img-dropzone p-4 rounded-xl text-center flex flex-col items-center justify-center min-h-[220px]">
+                                <img src="img/imagen2.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="max-h-52 object-contain rounded-lg" alt="Gráfico 2: Calidad 4K y Audio">
+                                <div class="flex-col items-center justify-center text-gray-400 space-y-2">
+                                    
+                                    
+                                </div>
+                            </div>
+                            <div class="h-56">
+                                <canvas id="chartP2"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+                        <div class="mb-4">
+                            <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 03</span>
+                            <h4 class="text-base font-bold text-white">¿Cómo califica la limpieza, comodidad de los asientos y tematización de las salas?</h4>
+                            <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">63.6%</strong> Bueno | <strong class="text-gold-400">27.3%</strong> Excelente y muy acogedor | <strong class="text-blue-400">9.1%</strong> Regular</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <div class="img-dropzone p-4 rounded-xl text-center flex flex-col items-center justify-center min-h-[220px]">
+                                <img src="img/imagen3.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="max-h-52 object-contain rounded-lg" alt="Gráfico 3: Limpieza y Comodidad">
+                                <div class="flex-col items-center justify-center text-gray-400 space-y-2">
+                                    
+                                </div>
+                            </div>
+                            <div class="h-56">
+                                <canvas id="chartP3"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+                        <div class="mb-4">
+                            <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 04</span>
+                            <h4 class="text-base font-bold text-white">¿Cómo fue su experiencia con la atención del personal en taquilla y confitería?</h4>
+                            <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">36.4%</strong> Amable pero con ligera demora | <strong class="text-gold-400">36.4%</strong> Atención normal | <strong class="text-blue-400">27.3%</strong> Muy amable y rápida</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <div class="img-dropzone p-4 rounded-xl text-center flex flex-col items-center justify-center min-h-[220px]">
+                                <img src="img/imagen4.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="max-h-52 object-contain rounded-lg" alt="Gráfico 4: Atención del Personal">
+                                <div class="flex-col items-center justify-center text-gray-400 space-y-2">
+                                    
+                                </div>
+                            </div>
+                            <div class="h-56">
+                                <canvas id="chartP4"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 5 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+                        <div class="mb-4">
+                            <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 05</span>
+                            <h4 class="text-base font-bold text-white">¿Qué opina sobre la variedad y costo de nuestros combos en dulcería (ej. "Combo Selva")?</h4>
+                            <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">45.5%</strong> Precios competitivos y gran variedad | <strong class="text-gold-400">45.5%</strong> Buena calidad pero precios algo elevados</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <div class="img-dropzone p-4 rounded-xl text-center flex flex-col items-center justify-center min-h-[220px]">
+                                <img src="img/imagen5.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="max-h-52 object-contain rounded-lg" alt="Gráfico 5: Variedad y Costo de Dulcería">
+                                <div class="flex-col items-center justify-center text-gray-400 space-y-2">
+                                    
+                                </div>
+                            </div>
+                            <div class="h-56">
+                                <canvas id="chartP5"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 6 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+    <!-- Encabezado de la Pregunta -->
+    <div class="mb-4">
+        <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 06</span>
+        <h4 class="text-base font-bold text-white">Al momento de elegir qué aspecto destaca MÁS como la mayor fortaleza de CINEMAZON?</h4>
+        <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">54.5%</strong> Ambiente Temático e Instalaciones | <strong class="text-gold-400">36.4%</strong> Tecnología de Proyección 4K y Sonido</p>
+    </div>
+
+    <!-- Contenedor Grid 2 Columnas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <!-- Columna 1: Imagen de Google Forms -->
+        <div class="img-dropzone p-3 rounded-xl flex items-center justify-center bg-darkbg/50 border border-darkborder h-60 w-full overflow-hidden">
+            <img src="img/imagen6.png" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                 class="max-h-full max-w-full object-contain rounded-lg" 
+                 alt="Gráfico 6: Mayor Fortaleza">
+            <div class="hidden flex-col items-center justify-center text-gray-500 space-y-1">
+                <span class="text-xs">Sin imagen</span>
+            </div>
+        </div>
+
+        <!-- Columna 2: Gráfico Interactivo Chart.js -->
+        <div class="h-60 w-full flex items-center justify-center relative">
+            <canvas id="chartP6"></canvas>
+        </div>
+    </div>
+</div>
+
+                    <!-- Pregunta 7 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+    <!-- Encabezado de la Pregunta -->
+    <div class="mb-4">
+        <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 07</span>
+        <h4 class="text-base font-bold text-white">¿Ha utilizado la página web oficial para consultar cartelera o seleccionar sus asientos?</h4>
+        <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">36.4%</strong> Reservó/consultó sin inconvenientes | <strong class="text-gold-400">27.3%</strong> Tuvo dudas | <strong class="text-blue-400">27.3%</strong> Prefiere Redes Sociales</p>
+    </div>
+
+    <!-- Contenedor Grid 2 Columnas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <!-- Columna 1: Imagen de Google Forms -->
+        <div class="img-dropzone p-3 rounded-xl flex items-center justify-center bg-darkbg/50 border border-darkborder h-60 w-full overflow-hidden">
+            <img src="img/imagen7.png" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                 class="max-h-full max-w-full object-contain rounded-lg" 
+                 alt="Gráfico 7: Uso de la Web Oficial">
+            <div class="hidden flex-col items-center justify-center text-gray-500 space-y-1">
+                <span class="text-xs">Sin imagen</span>
+            </div>
+        </div>
+
+        <!-- Columna 2: Gráfico Interactivo Chart.js -->
+        <div class="h-60 w-full flex items-center justify-center relative">
+            <canvas id="chartP7"></canvas>
+        </div>
+    </div>
+</div>
+
+                    <!-- Pregunta 8 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+                        <div class="mb-4">
+                            <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 08</span>
+                            <h4 class="text-base font-bold text-white">¿Por qué medio digital suele enterarse de las películas y promociones del cine?</h4>
+                            <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">63.6% (7 de 11)</strong> TikTok Rey Absoluto | <strong class="text-gold-400">27.3%</strong> Sitio Web Oficial</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <div class="img-dropzone p-4 rounded-xl text-center flex flex-col items-center justify-center min-h-[220px]">
+                                <img src="img/imagen8.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="max-h-52 object-contain rounded-lg" alt="Gráfico 8: Canales Digitales de Estrenos">
+                                <div class="flex-col items-center justify-center text-gray-400 space-y-2">
+                                    
+                                </div>
+                            </div>
+                            <div class="h-56">
+                                <canvas id="chartP8"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pregunta 9 -->
+                    <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+                        <div class="mb-4">
+                            <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">Pregunta 09</span>
+                            <h4 class="text-base font-bold text-white">En caso de realizar consultas por redes sociales (WhatsApp/Messenger), ¿cómo califica el tiempo de respuesta?</h4>
+                            <p class="text-xs text-gray-400 mt-1">Resultado: <strong class="text-emerald-400">54.5%</strong> Aceptable (1-3 horas) | <strong class="text-gold-400">27.3%</strong> Rápido (<30 min) | <strong class="text-red-400">18.2%</strong> Lento (>6 horas)</p>
+                        </div>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                            <div class="img-dropzone p-4 rounded-xl text-center flex flex-col items-center justify-center min-h-[220px]">
+                                <img src="img/imagen9.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="max-h-52 object-contain rounded-lg" alt="Gráfico 9: Tiempo de Respuesta Digital">
+                                <div class="flex-col items-center justify-center text-gray-400 space-y-2">
+                                    
+                                </div>
+                            </div>
+                            <div class="h-56">
+                                <canvas id="chartP9"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                   <div class="bg-darkbg/80 border border-darkborder p-6 rounded-2xl">
+                        <div class="mb-4">
+                            <span class="text-amazon-400 text-[10px] font-black uppercase tracking-wider block mb-1">
+
+               
+                  Pregunta 10</span>
+                            <h4 class="text-base font-bold text-white">Del 1 al 10, ¿qué tan probable es que recomiende CINEMAZON a sus amigos o familiares? (NPS)</h4>
+                            <p class="text-xs text-gray-400 mt-1">Resultado: Elevada disposición a recomendar en Satipo (Distribución con múltiples respuestas en 3, 5, 6, 8 y 10)</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                            <div class="img-dropzone p-3 rounded-xl text-center flex items-center justify-center min-h-[260px] h-[260px] w-full overflow-hidden">
+                                <img src="img/imagen10.png" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" class="max-h-full w-full object-contain rounded-lg" alt="Gráfico 10: Nivel de Recomendación NPS">
+                                <div class="hidden flex-col items-center justify-center text-gray-400 space-y-2">
+                                    <i class="fa-solid fa-image text-3xl text-amazon-500 mb-1"></i>
+                                    <span class="text-xs font-bold text-gray-300 block">Imagen 10 de Google Forms</span>
+                                    
+                                </div>
+                            </div>
+                            <div class="h-[260px] w-full bg-darkbg/50 border border-darkborder p-3 rounded-xl">
+                                <canvas id="chartP10"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 5.3 Reputación Digital por Plataforma -->
+            <div id="reputacion" class="bg-darkcard border border-darkborder rounded-2xl p-6 sm:p-8 mb-12">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-star text-gold-400"></i> 5.3 Reputación Digital por Plataforma
+                    </h3>
+                    <p class="text-xs text-gray-400 mt-1">CINEMAZON mantiene una sólida valoración promedio global superior a 4.5 estrellas</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                    <!-- Interactive Bar Chart -->
+                    <div class="bg-darkbg border border-darkborder p-5 rounded-xl">
+                        <span class="text-xs font-bold text-gray-300 mb-4 uppercase tracking-wider block text-center">Puntuación Promedio sobre 5.0</span>
+                        <div class="h-64">
+                            <canvas id="chartReputacion"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Image Slot & Data Table -->
+                    <div class="space-y-4">
+                        <!-- Image slot placeholder -->
+                        <div class="img-dropzone p-4 rounded-xl text-center flex flex-col items-center justify-center min-h-[140px]">
+                            
+                            
+
+                        <!-- Table -->
+                        <div class="overflow-x-auto rounded-xl border border-darkborder">
+                            <table class="w-full text-left text-xs">
+                                <thead class="bg-darkbg text-gray-400 uppercase text-[10px] tracking-wider">
+                                    <tr>
+                                        <th class="p-3">Plataforma</th>
+                                        <th class="p-3">Puntuación</th>
+                                        <th class="p-3">Reseñas</th>
+                                        <th class="p-3">Aspecto Elogiado</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-darkborder text-gray-300">
+                                    <tr class="hover:bg-darkbg/50">
+                                        <td class="p-3 font-bold text-white flex items-center gap-1.5"><i class="fa-brands fa-google text-red-400"></i> Google Maps</td>
+                                        <td class="p-3 font-black text-gold-400">4.7 / 5.0</td>
+                                        <td class="p-3">140 op.</td>
+                                        <td class="p-3 text-[11px]">Proyecciones 4K y comodidad de salas.</td>
+                                    </tr>
+                                    <tr class="hover:bg-darkbg/50">
+                                        <td class="p-3 font-bold text-white flex items-center gap-1.5"><i class="fa-brands fa-facebook text-blue-500"></i> Facebook Reviews</td>
+                                        <td class="p-3 font-black text-gold-400">4.6 / 5.0</td>
+                                        <td class="p-3">85 op.</td>
+                                        <td class="p-3 text-[11px]">Promociones de cartelera y atención.</td>
+                                    </tr>
+                                    <tr class="hover:bg-darkbg/50">
+                                        <td class="p-3 font-bold text-white flex items-center gap-1.5"><i class="fa-brands fa-tiktok text-emerald-400"></i> TikTok / Instagram</td>
+                                        <td class="p-3 font-black text-gold-400">4.8 / 5.0</td>
+                                        <td class="p-3">210 int.</td>
+                                        <td class="p-3 text-[11px]">Contenido dinámico de estrenos (63.6%).</td>
+                                    </tr>
+                                    <tr class="hover:bg-darkbg/50">
+                                        <td class="p-3 font-bold text-white flex items-center gap-1.5"><i class="fa-solid fa-globe text-amazon-400"></i> Web Cinemazon</td>
+                                        <td class="p-3 font-black text-gold-400">4.5 / 5.0</td>
+                                        <td class="p-3">60 res.</td>
+                                        <td class="p-3 text-[11px]">Selección interactiva de asientos.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5.4 Brecha en Canales de Comunicación Digital -->
+<div id="brechas" class="bg-darkcard border border-darkborder rounded-2xl p-6 sm:p-8">
+    <div class="mb-6">
+        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-clock text-red-400"></i> 5.4 Brecha en Canales de Comunicación Digital
+        </h3>
+        <p class="text-xs text-gray-300 leading-relaxed mt-1">
+            A pesar de la sólida valoración de los espectadores en salas de cine, se identificó un cuello de botella crítico en los canales de mensajería digital y atención rápida. Los tiempos de respuesta actuales superan el estándar óptimo.
+        </p>
+    </div>
+
+    <!-- Contenedor Grid 2 Columnas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <!-- Columna Izquierda: Gráfico Interactivo Chart.js -->
+        <div class="bg-darkbg border border-darkborder p-5 rounded-xl h-80 flex flex-col justify-between">
+            <span class="text-xs font-bold text-gray-300 uppercase tracking-wider block text-center mb-2">
+                Tiempos Actuales (Horas) vs. Meta (&lt;30 min / 0.5h)
+            </span>
+            <div class="h-64 w-full relative">
+                <canvas id="chartBrechas"></canvas>
+            </div>
+        </div>
+
+        <!-- Columna Derecha: Imagen de Tu Gráfico + Alerta del Hallazgo -->
+        <div class="flex flex-col space-y-4 justify-between h-80">
+            <!-- Espacio de la Imagen -->
+            <div class="img-dropzone p-3 rounded-xl flex items-center justify-center bg-darkbg border border-darkborder h-48 w-full overflow-hidden">
+                <img src="img/graficobrechas.png" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                     class="max-h-full max-w-full object-contain rounded-lg" 
+                     alt="Figura 3: Brecha de Tiempos de Respuesta">
+                <div class="hidden flex-col items-center justify-center text-gray-500 space-y-1">
+                    <span class="text-xs">Sin imagen</span>
+                </div>
+            </div>
+
+            <!-- Recuadro de Hallazgo Crítico -->
+            <div class="bg-darkbg border border-red-500/30 rounded-xl p-4 text-xs space-y-1">
+                <div class="flex items-center gap-2 text-red-400 font-bold uppercase tracking-wider text-[11px]">
+                    <i class="fa-solid fa-triangle-exclamation"></i> Hallazgo Crítico de Respuesta
+                </div>
+                <p class="text-gray-300 leading-relaxed">
+                    El <strong>18.2%</strong> de los encuestados reporta respuestas lentas (>6h) en redes sociales. Implementar respuestas automáticas reducirá el tiempo promedio a menos de <strong>30 minutos</strong>.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- SECTION 6: MATRIZ FODA ESTRATÉGICA -->
+    <section id="foda" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-amazon-500 text-xs font-black uppercase tracking-widest">Diagnóstico Consolidado</span>
+                <h2 class="text-3xl font-black text-white mt-1">6. Matriz FODA Estratégica</h2>
+                <p class="text-gray-400 text-xs mt-2">Factores internos y externos identificados en CINEMAZON Satipo.</p>
+            </div>
+
+            <!-- FODA Interactive Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- FORTALEZAS -->
+                <div class="bg-darkcard border border-amazon-500/30 rounded-2xl p-6 relative overflow-hidden group hover:border-amazon-500 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-extrabold text-emerald-400 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved"></i> FORTALEZAS (Internas)
+                        </h4>
+                        <span class="bg-amazon-500/10 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-full uppercase">Ventajas Clave</span>
+                    </div>
+                    <ul class="space-y-2.5 text-xs text-gray-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-amazon-500 mt-0.5"></i>
+                            <span>Identidad gráfica sólida vinculada al orgullo de la Selva Central (tucán y paleta tropical).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-amazon-500 mt-0.5"></i>
+                            <span>Plataforma web moderna con sistema interactivo de reserva de asientos y carrito de dulcería.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-amazon-500 mt-0.5"></i>
+                            <span>Único complejo cinematográfico moderno con proyecciones 4K y sonido envolvente en Satipo.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-check text-amazon-500 mt-0.5"></i>
+                            <span>Combos de dulcería temáticos ("Combo Selva") y atención presencial acogedora.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- OPORTUNIDADES -->
+                <div class="bg-darkcard border border-gold-500/30 rounded-2xl p-6 relative overflow-hidden group hover:border-gold-500 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-extrabold text-gold-400 flex items-center gap-2">
+                            <i class="fa-solid fa-rocket"></i> OPORTUNIDADES (Externas)
+                        </h4>
+                        <span class="bg-gold-500/10 text-gold-400 text-[10px] font-black px-2.5 py-1 rounded-full uppercase">Crecimiento</span>
+                    </div>
+                    <ul class="space-y-2.5 text-xs text-gray-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-arrow-trend-up text-gold-400 mt-0.5"></i>
+                            <span>Creación de promociones exclusivas por compra digital previa (Yape / Plin / QR).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-arrow-trend-up text-gold-400 mt-0.5"></i>
+                            <span>Crecimiento de demanda de entretenimiento y cultura pop en Satipo, Mazamari y Río Negro.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-arrow-trend-up text-gold-400 mt-0.5"></i>
+                            <span>Tendencia de videos cortos de alto impacto en TikTok (63.6% de preferencia del público).</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-arrow-trend-up text-gold-400 mt-0.5"></i>
+                            <span>Alianzas con colegios e instituciones para funciones culturales y corporativas.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- DEBILIDADES -->
+                <div class="bg-darkcard border border-red-500/30 rounded-2xl p-6 relative overflow-hidden group hover:border-red-500 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-extrabold text-red-400 flex items-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation"></i> DEBILIDADES (Internas)
+                        </h4>
+                        <span class="bg-red-500/10 text-red-400 text-[10px] font-black px-2.5 py-1 rounded-full uppercase">A Corregir</span>
+                    </div>
+                    <ul class="space-y-2.5 text-xs text-gray-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-xmark text-red-400 mt-0.5"></i>
+                            <span>Falta de automatización para responder consultas frecuentes sobre cartelera en WhatsApp.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-xmark text-red-400 mt-0.5"></i>
+                            <span>Publicaciones irregulares en redes durante días con baja afluencia de estrenos.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-xmark text-red-400 mt-0.5"></i>
+                            <span>Necesidad de capacitar al personal en la difusión activa de combos de dulcería.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- AMENAZAS -->
+                <div class="bg-darkcard border border-gray-600/40 rounded-2xl p-6 relative overflow-hidden group hover:border-gray-500 transition-all">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-lg font-extrabold text-gray-300 flex items-center gap-2">
+                            <i class="fa-solid fa-cloud-bolt"></i> AMENAZAS (Externas)
+                        </h4>
+                        <span class="bg-gray-500/10 text-gray-400 text-[10px] font-black px-2.5 py-1 rounded-full uppercase">Riesgos</span>
+                    </div>
+                    <ul class="space-y-2.5 text-xs text-gray-300">
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-ban text-gray-400 mt-0.5"></i>
+                            <span>Filtrado de películas en plataformas de streaming o piratería digital informal.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-ban text-gray-400 mt-0.5"></i>
+                            <span>Variaciones climáticas extremas en la Selva que reduzcan el desplazamiento.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <i class="fa-solid fa-ban text-gray-400 mt-0.5"></i>
+                            <span>Saturación de publicidad en redes sociales.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: PROPUESTA ESTRATÉGICA Y PLAN DE ACCIÓN (KPIS) -->
+    <section id="plan-accion" class="py-16 bg-darkbg border-b border-darkborder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+                <div>
+                    <span class="text-amazon-500 text-xs font-black uppercase tracking-widest">Matriz de Implementación</span>
+                    <h2 class="text-3xl font-black text-white mt-1">7. Propuesta Estratégica y Plan de Acción (KPIs)</h2>
+                </div>
+                <div class="text-xs text-gray-400 mt-2 md:mt-0 font-bold bg-darkcard px-4 py-2 rounded-xl border border-darkborder">
+                    Presupuesto Asignado: <span class="text-emerald-400 font-extrabold">S/. 1,200</span>
+                </div>
+            </div>
+
+            <!-- KPIs Table Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- KPI 1 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amazon-500/10 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-md border border-amazon-500/30">Pilar 01</span>
+                            <span class="text-xs font-bold text-gray-400">Mes 1</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mb-2">1. Estandarización Visual</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                            Elaborar Manual de Identidad Visual y estandarizar piezas gráficas físicas y digitales.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-darkborder">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block mb-1">KPI / Indicador</span>
+                        <div class="flex justify-between items-center text-xs font-black text-emerald-400">
+                            <span>100% Piezas Aprobadas</span>
+                            <span>16 pub/mes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 2 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amazon-500/10 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-md border border-amazon-500/30">Pilar 02</span>
+                            <span class="text-xs font-bold text-gray-400">Mes 1 - Mes 2</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mb-2">2. Protocolo Digital Omnicanal</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                            Implementar respuestas rápidas y automatización en WhatsApp Business y redes social.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-darkborder">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block mb-1">KPI / Indicador</span>
+                        <div class="flex justify-between items-center text-xs font-black text-emerald-400">
+                            <span>Tiempo de Respuesta</span>
+                            <span>&lt; 10 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 3 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-gold-500/10 text-gold-400 text-[10px] font-black px-2.5 py-1 rounded-md border border-gold-500/30">Pilar 03</span>
+                            <span class="text-xs font-bold text-gray-400">Continuo</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mb-2">3. Storytelling de Origen</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                            Producir serie de vídeos dinámicos en TikTok e IG Reels sobre la experiencia 4K y estrenos.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-darkborder">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block mb-1">KPI / Indicador</span>
+                        <div class="flex justify-between items-center text-xs font-black text-gold-400">
+                            <span>Engagement Mensual</span>
+                            <span>+20% Crecimiento</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 4 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amazon-500/10 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-md border border-amazon-500/30">Pilar 04</span>
+                            <span class="text-xs font-bold text-gray-400">Mes 2</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mb-2">4. Encuesta Continua (QR)</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                            Disponer códigos QR en sala vinculados a incentivos o descuentos en dulcería.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-darkborder">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block mb-1">KPI / Indicador</span>
+                        <div class="flex justify-between items-center text-xs font-black text-emerald-400">
+                            <span>Muestra Evaluada</span>
+                            <span>100% de la Muestra</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 5 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-gold-500/10 text-gold-400 text-[10px] font-black px-2.5 py-1 rounded-md border border-gold-500/30">Pilar 05</span>
+                            <span class="text-xs font-bold text-gray-400">Mes 3</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mb-2">5. Promoción de Dulcería</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                            Impulsar activamente los combos temáticos ("Combo Selva") en cajas registradoras y redes.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-darkborder">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block mb-1">KPI / Indicador</span>
+                        <div class="flex justify-between items-center text-xs font-black text-gold-400">
+                            <span>Ventas de Dulcería</span>
+                            <span>+15% Incremento</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 6 -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-5 hover:border-amazon-500/50 transition-all flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="bg-amazon-500/10 text-emerald-400 text-[10px] font-black px-2.5 py-1 rounded-md border border-amazon-500/30">Pilar 06</span>
+                            <span class="text-xs font-bold text-gray-400">Mes 3 - Mes 4</span>
+                        </div>
+                        <h4 class="text-base font-bold text-white mb-2">6. Funciones y Experiencias</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed mb-4">
+                            Organizar eventos especiales de cartelera y estrenos regionales los fines de semana.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-darkborder">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold block mb-1">KPI / Indicador</span>
+                        <div class="flex justify-between items-center text-xs font-black text-emerald-400">
+                            <span>Aforo de Eventos</span>
+                            <span>90% Asistencia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8 & 9: CONCLUSIONES Y REFERENCIAS -->
+    <section id="conclusiones" class="py-16 bg-darkbg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                
+                <!-- 8. Conclusiones y Recomendaciones -->
+                <div class="space-y-6">
+                    <div class="bg-darkcard border border-darkborder rounded-2xl p-6 sm:p-8">
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-award text-amazon-500"></i> 8.1 Conclusiones
+                        </h3>
+                        <ol class="space-y-3 text-xs text-gray-300 list-decimal pl-4 leading-relaxed">
+                            <li>
+                                <strong>CINEMAZON PERÚ S.A.C.</strong> posee un posicionamiento muy sólido cimentado en la calidad técnica de sus proyecciones 4K y la autenticidad de su concepto de la Selva Central, reflejado en una valoración superior a 4.6/5 estrellas en plataformas principales.
+                            </li>
+                            <li>
+                                El principal riesgo reputacional no reside en la experiencia dentro de las salas (donde el 54.5% valora el ambiente temático), sino en los tiempos de espera prolongados en canales digitales de atención.
+                            </li>
+                            <li>
+                                La estructuración de este plan estratégico integral permitirá mitigar las debilidades operativas digitales y capitalizar las oportunidades de expansión en el mercado del entretenimiento en Satipo.
+                            </li>
+                        </ol>
+                    </div>
+
+                    <!-- Highlight Key Recommendation Box -->
+                    <div class="bg-gradient-to-r from-amazon-900/60 to-darkcard border border-amazon-500/40 rounded-2xl p-6 text-xs text-gray-200">
+                        <span class="text-gold-400 font-black uppercase tracking-wider block mb-2"><i class="fa-solid fa-star"></i> Recomendación Clave</span>
+                        <p class="leading-relaxed">
+                            La pronta implementación de la automatización omnicanal y el programa de fidelización digital reforzará la retención de clientes en un <strong>20% en el primer semestre de ejecución</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 9. Referencias Bibliográficas -->
+                <div class="bg-darkcard border border-darkborder rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fa-solid fa-book-bookmark text-gold-400"></i> 9. Referencias Bibliográficas
+                        </h3>
+                        <ul class="space-y-3 text-xs text-gray-400 italic leading-relaxed">
+                            <li class="pl-4 border-l-2 border-amazon-500">
+                                Capriotti, P. (2009). <em>Branding corporativo: Fundamentos para la gestión estratégica de la identidad corporativa</em>. Colección de Libros de la Empresa.
+                            </li>
+                            <li class="pl-4 border-l-2 border-amazon-500">
+                                Costa, J. (2004). <em>La imagen de marca: Un fenómeno social</em>. Paidós.
+                            </li>
+                            <li class="pl-4 border-l-2 border-amazon-500">
+                                Kaplan, A. M., & Haenlein, M. (2010). <em>Users of the world, unite! The challenges and opportunities of Social Media</em>. Business Horizons, 53(1), 59-68.
+                            </li>
+                            <li class="pl-4 border-l-2 border-amazon-500">
+                                Kotler, P., & Keller, K. L. (2016). <em>Marketing management</em> (15th ed.). Pearson.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Report Footer Brand Note -->
+                    <div class="mt-8 pt-4 border-t border-darkborder text-center">
+                        <span class="text-[11px] font-black text-emerald-400 uppercase tracking-widest block">CINEMAZON PERÚ S.A.C.</span>
+                        <span class="text-[10px] text-gray-500">Satipo, Junín • Todos los derechos reservados 2026</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-darkbg border-t border-darkborder py-8 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4">
+            <p>Informe de Auditoría de Imagen Pública | Elaborado para SENATI Río Negro por Jheferson Espinal.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC FOR CHARTS & NAVIGATION -->
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        window.onload = function() {
+            const chartDefaults = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { labels: { color: '#d1d5db', font: { size: 10 } } } }
+            };
+
+            // Chart P1
+            new Chart(document.getElementById('chartP1'), {
+                type: 'bar',
+                data: {
+                    labels: ['Ambiente Selva', 'Tecnología 4K', 'Atención', 'Promociones'],
+                    datasets: [{ label: '% Votos', data: [54.5, 27.3, 9.1, 9.1], backgroundColor: ['#00a859', '#fbbf24', '#3b82f6', '#ec4899'], borderRadius: 6 }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P2
+            new Chart(document.getElementById('chartP2'), {
+                type: 'bar',
+                data: {
+                    labels: ['1 (Muy Def)', '2 (Def)', '3 (Regular)', '4 (Bueno)', '5 (Exc)'],
+                    datasets: [{ label: '% Votos', data: [0, 36.4, 0, 45.5, 27.3], backgroundColor: '#fbbf24', borderRadius: 6 }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P3
+            new Chart(document.getElementById('chartP3'), {
+                type: 'pie',
+                data: {
+                    labels: ['Bueno (63.6%)', 'Excelente (27.3%)', 'Regular (9.1%)'],
+                    datasets: [{ data: [63.6, 27.3, 9.1], backgroundColor: ['#ef4444', '#2563eb', '#f59e0b'] }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P4
+            new Chart(document.getElementById('chartP4'), {
+                type: 'pie',
+                data: {
+                    labels: ['Amable c/demora (36.4%)', 'Normal (36.4%)', 'Muy amable/rápida (27.3%)'],
+                    datasets: [{ data: [36.4, 36.4, 27.3], backgroundColor: ['#ea580c', '#f59e0b', '#2563eb'] }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P5
+            new Chart(document.getElementById('chartP5'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Precios competitivos (45.5%)', 'Precios algo elevados (45.5%)', 'Regular (9.1%)'],
+                    datasets: [{ data: [45.5, 45.5, 9.1], backgroundColor: ['#2563eb', '#dc2626', '#f59e0b'] }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P6
+            new Chart(document.getElementById('chartP6'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Ambiente Temático (54.5%)', 'Tecnología 4K (36.4%)', 'Promociones (9.1%)'],
+                    datasets: [{ data: [54.5, 36.4, 9.1], backgroundColor: ['#dc2626', '#2563eb', '#16a34a'] }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P7
+            new Chart(document.getElementById('chartP7'), {
+                type: 'pie',
+                data: {
+                    labels: ['Sin inconvenientes (36.4%)', 'Tuvo dudas (27.3%)', 'Prefiere Redes (27.3%)', 'No la usó (9.1%)'],
+                    datasets: [{ data: [36.4, 27.3, 27.3, 9.1], backgroundColor: ['#2563eb', '#dc2626', '#f59e0b', '#16a34a'] }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P8
+            new Chart(document.getElementById('chartP8'), {
+                type: 'bar',
+                data: {
+                    labels: ['Facebook', 'Instagram', 'TikTok', 'WhatsApp', 'Sitio Web'],
+                    datasets: [{ label: '% Preferencia', data: [9.1, 9.1, 63.6, 9.1, 27.3], backgroundColor: '#eab308', borderRadius: 6 }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P9
+            new Chart(document.getElementById('chartP9'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Aceptable 1-3h (54.5%)', 'Rápido <30m (27.3%)', 'Lento >6h (18.2%)'],
+                    datasets: [{ data: [54.5, 27.3, 18.2], backgroundColor: ['#dc2626', '#2563eb', '#f59e0b'] }]
+                },
+                options: chartDefaults
+            });
+
+            // Chart P10
+            new Chart(document.getElementById('chartP10'), {
+                type: 'bar',
+                data: {
+                    labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                    datasets: [{ label: 'Respuestas', data: [0, 0, 2, 0, 2, 2, 0, 2, 1, 2], backgroundColor: '#eab308', borderRadius: 4 }]
+                },
+                options: chartDefaults
+            });
+
+            // Reputación Digital Bar Chart
+            new Chart(document.getElementById('chartReputacion'), {
+                type: 'bar',
+                data: {
+                    labels: ['Google Maps', 'Facebook', 'TikTok / IG', 'Web Cinemazon'],
+                    datasets: [{ label: 'Puntuación Promedio (sobre 5.0)', data: [4.7, 4.6, 4.8, 4.5], backgroundColor: '#fbbf24', borderRadius: 8 }]
+                },
+                options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false }
+            });
+
+            // Brechas Digitales Chart
+            new Chart(document.getElementById('chartBrechas'), {
+                type: 'bar',
+                data: {
+                    labels: ['Instagram DM', 'Facebook Msg', 'TikTok Comments', 'WhatsApp'],
+                    datasets: [
+                        { label: 'Tiempo Actual (Horas)', data: [14.0, 11.0, 16.0, 2.0], backgroundColor: '#ef4444', borderRadius: 6 },
+                        { label: 'Meta Propuesta (<0.5h)', data: [0.5, 0.5, 0.5, 0.5], backgroundColor: '#10b981', borderRadius: 6 }
+                    ]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        };
+    </script>
+<!-- ... existing code -->
